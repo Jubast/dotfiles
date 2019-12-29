@@ -1,0 +1,59 @@
+;==========================================================
+;
+;
+;   ██████╗  ██████╗ ██╗  ██╗   ██╗██████╗  █████╗ ██████╗
+;   ██╔══██╗██╔═══██╗██║  ╚██╗ ██╔╝██╔══██╗██╔══██╗██╔══██╗
+;   ██████╔╝██║   ██║██║   ╚████╔╝ ██████╔╝███████║██████╔╝
+;   ██╔═══╝ ██║   ██║██║    ╚██╔╝  ██╔══██╗██╔══██║██╔══██╗
+;   ██║     ╚██████╔╝███████╗██║   ██████╔╝██║  ██║██║  ██║
+;   ╚═╝      ╚═════╝ ╚══════╝╚═╝   ╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝
+;
+;
+;   To learn more about how to configure Polybar
+;   go to https://github.com/polybar/polybar
+;
+;   The README contains a lot of information
+;
+;==========================================================
+
+;; Global WM Settings
+
+[global/wm]
+margin-bottom = 0
+margin-top = 0
+include-file = ~/.config/polybar/colors
+include-file = ~/.config/polybar/modules
+
+;; Settings
+
+[settings]
+screenchange-reload = true
+
+;; Bars
+
+[bar/top]
+monitor = ${env:MONITORPOLYBAR}
+width = 100%:-20
+height = 35
+offset-x = 10
+offset-y = 10
+bottom = false
+
+radius = 8
+line-size = 2
+fixed-center = false
+override-redirect = true
+
+background = ${colors.bar-bg}
+foreground = ${colors.bar-fg}
+
+font-0 = fixed:pixelsize=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = siji:pixelsize=10;1
+font-3 = "Font Awesome 5 Free:style=Regular:pixelsize=9;1"
+font-4 = "Font Awesome 5 Free:style=Solid:pixelsize=9;1"
+font-5 = "Font Awesome 5 Brands:pixelsize=9;1"
+
+modules-left = workspaces
+;modules-center = mpd
+modules-right = pulseaudio cpu memory date
