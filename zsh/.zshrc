@@ -26,7 +26,6 @@ autoload -Uz compinit
 compinit
 
 # -------------------------------- POWERLEVEL ---------------------------------
-
 POWERLEVEL9K_MODE="nerdfont-complete"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(user dir vcs)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(status time)
