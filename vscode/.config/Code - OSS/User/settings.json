@@ -1,0 +1,8 @@
+{
+    "d.servedPath": "/home/miha/.local/share/code-d/bin/serve-d",
+    "workbench.iconTheme": "vscode-icons",
+    "window.zoomLevel": 0,
+    "todo-tree.highlights.enabled": true,
+    "diffEditor.ignoreTrimWhitespace": false,
+    "editor.fontFamily": "'Droid Sans Mono', 'monospace', monospace, 'Droid Sans Fallback', 'Font Awesome 5 Brands', 'Font Awesome 5 Free', 'Font Awesome 5 Free Solid', 'Hack Nerd Font Mono'"
+}
