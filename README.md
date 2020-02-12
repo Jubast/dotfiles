@@ -13,6 +13,7 @@
 - NotoMono (font for window manager)
 - NotoSans (font for gtk applications)
 - [FontAwesome](https://github.com/FortAwesome/Font-Awesome) (font for window manager)
+- [JetbrainsMono](https://www.jetbrains.com/lp/mono/) (font for vscode)
 
 ## How to:
 These dotfiles are prepared to be installed using GNU stow.   
@@ -20,7 +21,7 @@ These dotfiles are prepared to be installed using GNU stow.
 cd ~
 git clone https://github.com/Jubast/dotfiles
 cd dotfiles
-stow alacritty compton fonts gtk i3 polybar vscode wallpapers zsh
+stow alacritty compton fonts gtk i3 polybar vscode wallpapers zsh rofi
 ```
 
 ## Screenshots
