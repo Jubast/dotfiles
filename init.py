@@ -44,7 +44,7 @@ execute(packages)
 print("Enabling NewtworkManager...")
 execute(["systemctl", "enable", "NetworkManager"])
 
-# enable firewall
+# enable firewall (doesn't work in chroot)
 #print("Enabling firewall...")
 #execute(["ufw", "enable"])
 #print("firewall status:")
@@ -56,7 +56,11 @@ lm_url = "https://github.com/cylgom/ly/releases/download/v0.5.0/ly_0.5.0.zip"
 
 execute(["sudo", "-u", USER, "wget", lm_url, "-O", "/tmp/ly.zip"])
 execute(["sudo", "-u", USER, "unzip", "-o", "/tmp/ly.zip", "-d", "/tmp/"])
-execute(["sh", "/tmp/ly_0.5.0/install.sh"])
+os.chdir("/tmp/ly_0.5.0")
+execute(["sh", "install.sh"])
+
+execute(["systemctl", "enable", "ly.service"])
+execute(["systemctl", "disable", "getty@tty2.service"])
 
 # xorg config files
 print("Copying X11 config files...")
