@@ -8,6 +8,10 @@ import subprocess as sp, pwd
 USER = "miha"
 SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
+def execute(command):
+    result = sp.run(command)
+    resul.check_returncode()
+
 print("Starting the OC settup...")
 
 # install packages
@@ -25,7 +29,8 @@ packages.append("zsh")
 packages.append("zsh-theme-powerlevel9k")
 packages.append("zsh-syntax-highlighting")
 packages.append("zsh-history-substring-search")
-packages.append("zsh-completions zsh-autosuggestions")
+packages.append("zsh-completions")
+packages.append("zsh-autosuggestions")
 packages.append("firefox")
 packages.append("stow")
 packages.append("rofi")
@@ -33,44 +38,38 @@ packages.append("alacritty")
 packages.append("arandr")
 
 print("Installing defined packages...")
-sp.run(packages)
+execute(packages)
 
 # enable network manager
 print("Enabling NewtworkManager...")
-sp.run(["systemctl", "enable", "NetworkManager"])
-sp.run(["systemctl", "start", "NetworkManager"])
+execute(["systemctl", "enable", "NetworkManager"])
+execute(["systemctl", "start", "NetworkManager"])
 
 # enable firewall
 print("Enabling firewall...")
-sp.run(["ufw", "enable"])
+execute(["ufw", "enable"])
 print("firewall status:")
-sp.run(["ufw", "status", "verbose"])
+execute(["ufw", "status", "verbose"])
 
 # install login manager
 print("Installing login manager...")
-lm_url = "https://github.com/cylgom/ly/archive/v0.5.0.zip"
+lm_url = "https://github.com/cylgom/ly/releases/download/v0.5.0/ly_0.5.0.zip"
 
-sp.run(["sudo", "-u", USER, "wget", lm_url, "-O", "/tmp/ly.zip"])
-sp.run(["sudo", "-u", USER, "unzip", "-o", "/tmp/ly.zip", "-d", "/tmp/"])
-os.chdir("/tmp/ly-0.5.0")
-
-sp.run(["sudo", "-u", USER, "make", "github"])
-sp.run(["sudo", "-u", USER, "make"])
-sp.run(["make", "install"])
-sp.run(["systemctl", "enable", "ly.service"])
-sp.run(["systemctl", "disable", "getty@tty2.service"])
+execute(["sudo", "-u", USER, "wget", lm_url, "-O", "/tmp/ly.zip"])
+execute(["sudo", "-u", USER, "unzip", "-o", "/tmp/ly.zip", "-d", "/tmp/"])
+execute(["/tmp/ly_0.5.0/install.sh"])
 
 # xorg config files
 print("Copying X11 config files...")
-monitor_config_path = os.path.join(os.path.join(SCRIPT_PATH, "X11"), "10-monitor.conf")
-mouse_config_path = os.path.join(os.path.join(SCRIPT_PATH, "X11"), "50-mouse.conf")
+monitor_config_path = os.path.join(os.path.join(SCRIPT_PATH, "configs"), "10-monitor.conf")
+mouse_config_path = os.path.join(os.path.join(SCRIPT_PATH, "configs"), "50-mouse.conf")
 
 monitors = sp.getoutput("xrandr")
 if "Virtual-1 connected" in monitors:
     print("Skipping copyieng X11 config files")
 else:
-    sp.run(["cp", monitor_config_path, "/etc/X11/xorg.conf.d/"])
-    sp.run(["cp", mouse_config_path, "/etc/X11/xorg.conf.d/"])
+    execute(["cp", monitor_config_path, "/etc/X11/xorg.conf.d/"])
+    execute(["cp", mouse_config_path, "/etc/X11/xorg.conf.d/"])
 
 # TODO: KVM files
 
@@ -79,18 +78,18 @@ homedir = "/home/" + USER
 configdir = home + "/.config"
 localdir = home + "/local/share"
 
-sp.run(["sudo", "-u", USER, "mkdir", "-p", configdir])
-sp.run(["sudo", "-u", USER, "mkdir", "-p", localdir])
+execute(["sudo", "-u", USER, "mkdir", "-p", configdir])
+execute(["sudo", "-u", USER, "mkdir", "-p", localdir])
 
 # create common folders
-sp.run(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Documents"])
-sp.run(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Downloads"])
-sp.run(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Music"])
-sp.run(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Pictures"])
-sp.run(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Projects"])
+execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Documents"])
+execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Downloads"])
+execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Music"])
+execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Pictures"])
+execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Projects"])
 
 # stow dotfiles
 os.chdir("/home/" + USER + "/dotfiles")
-sp.run(["sudo", "-u", USER, "stow", "alacritty", "compton", "fonts", "zsh", "rofi"])
+execute(["sudo", "-u", USER, "stow", "alacritty", "compton", "fonts", "zsh", "rofi"])
 
 print("done! :)")
