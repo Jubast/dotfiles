@@ -67,12 +67,8 @@ print("Copying X11 config files...")
 monitor_config_path = os.path.join(os.path.join(SCRIPT_PATH, "configs"), "10-monitor.conf")
 mouse_config_path = os.path.join(os.path.join(SCRIPT_PATH, "configs"), "50-mouse.conf")
 
-monitors = sp.getoutput("xrandr")
-if "Virtual-1 connected" in monitors:
-    print("Skipping copyieng X11 config files")
-else:
-    execute(["cp", monitor_config_path, "/etc/X11/xorg.conf.d/"])
-    execute(["cp", mouse_config_path, "/etc/X11/xorg.conf.d/"])
+execute(["cp", monitor_config_path, "/etc/X11/xorg.conf.d/"])
+execute(["cp", mouse_config_path, "/etc/X11/xorg.conf.d/"])
 
 # TODO: KVM files
 
