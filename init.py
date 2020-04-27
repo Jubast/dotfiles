@@ -10,7 +10,7 @@ SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 
 def execute(command):
     result = sp.run(command)
-    resul.check_returncode()
+    result.check_returncode()
 
 print("Starting the OC settup...")
 
@@ -43,13 +43,12 @@ execute(packages)
 # enable network manager
 print("Enabling NewtworkManager...")
 execute(["systemctl", "enable", "NetworkManager"])
-execute(["systemctl", "start", "NetworkManager"])
 
 # enable firewall
-print("Enabling firewall...")
-execute(["ufw", "enable"])
-print("firewall status:")
-execute(["ufw", "status", "verbose"])
+#print("Enabling firewall...")
+#execute(["ufw", "enable"])
+#print("firewall status:")
+#execute(["ufw", "status", "verbose"])
 
 # install login manager
 print("Installing login manager...")
@@ -57,7 +56,7 @@ lm_url = "https://github.com/cylgom/ly/releases/download/v0.5.0/ly_0.5.0.zip"
 
 execute(["sudo", "-u", USER, "wget", lm_url, "-O", "/tmp/ly.zip"])
 execute(["sudo", "-u", USER, "unzip", "-o", "/tmp/ly.zip", "-d", "/tmp/"])
-execute(["/tmp/ly_0.5.0/install.sh"])
+execute(["sh", "/tmp/ly_0.5.0/install.sh"])
 
 # xorg config files
 print("Copying X11 config files...")
@@ -75,8 +74,8 @@ else:
 
 # create config directories
 homedir = "/home/" + USER
-configdir = home + "/.config"
-localdir = home + "/local/share"
+configdir = homedir + "/.config"
+localdir = homedir + "/local/share"
 
 execute(["sudo", "-u", USER, "mkdir", "-p", configdir])
 execute(["sudo", "-u", USER, "mkdir", "-p", localdir])
@@ -90,6 +89,7 @@ execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Projects"])
 
 # stow dotfiles
 os.chdir("/home/" + USER + "/dotfiles")
+sp.run(["rm", "/home/" + USER + "/.zshrc"]) #ignore status code
 execute(["sudo", "-u", USER, "stow", "alacritty", "compton", "fonts", "zsh", "rofi"])
 
 print("done! :)")
