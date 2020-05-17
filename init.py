@@ -16,7 +16,7 @@ print("Starting the OC settup...")
 
 # install packages
 packages = [ "pacman", "-Sy" ]
-packages.append("networkmanager")
+#packages.append("networkmanager")
 packages.append("xorg")
 packages.append("awesome")
 packages.append("noto-fonts")
@@ -41,14 +41,14 @@ print("Installing defined packages...")
 execute(packages)
 
 # enable network manager
-print("Enabling NewtworkManager...")
-execute(["systemctl", "enable", "NetworkManager"])
+#print("Enabling NewtworkManager...")
+#execute(["systemctl", "enable", "NetworkManager"])
 
 # enable firewall (doesn't work in chroot)
-#print("Enabling firewall...")
-#execute(["ufw", "enable"])
-#print("firewall status:")
-#execute(["ufw", "status", "verbose"])
+print("Enabling firewall...")
+execute(["ufw", "enable"])
+print("firewall status:")
+execute(["ufw", "status", "verbose"])
 
 # install login manager
 print("Installing login manager...")
@@ -91,5 +91,8 @@ execute(["sudo", "-u", USER, "mkdir", "-p", homedir + "/Projects"])
 os.chdir("/home/" + USER + "/dotfiles")
 sp.run(["rm", "/home/" + USER + "/.zshrc"]) #ignore status code
 execute(["sudo", "-u", USER, "stow", "alacritty", "compton", "fonts", "zsh", "rofi"])
+
+# install nvidia drivers
+# nvidia package / generate xorg config for nvidia
 
 print("done! :)")

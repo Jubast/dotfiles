@@ -1,7 +1,7 @@
-# ----- aliases -----
+# ----- aliases ----- 
 alias ls="ls --color=auto"
-alias ll="ls -la"
-alias la="ls -a"
+alias ll="ls -la --color=auto"
+alias la="ls -a --color=auto"
 
 # ----- options -----
 setopt nocaseglob                                               # Case insensitive globbing
