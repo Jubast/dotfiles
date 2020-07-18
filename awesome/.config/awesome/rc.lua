@@ -12,7 +12,7 @@ require("awful.hotkeys_popup.keys")
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, font and wallpapers.
-beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
+beautiful.init("/home/miha/.config/awesome/modules/theme.lua")
 
 local config = {
     modkey = "Mod4",
@@ -186,6 +186,10 @@ awful.rules.rules = {
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
                      placement = awful.placement.no_overlap+awful.placement.no_offscreen
+--                     maximized_vertical   = false,
+--                     maximized_horizontal = false,
+--                     floating = false,
+--                     maximized = false
      }
     },
 

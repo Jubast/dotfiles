@@ -25,36 +25,46 @@ function keys:init(args)
     awful.key({ modkey, "Shift"   }, "e", awesome.quit,
         {description = "exit awesome", group = "awesome"}),
     
-        -- Client movement
-    awful.key({ modkey }, "h", function () awful.client.focus.bydirection("left") end, 
+    -- Client movement
+    awful.key({ modkey }, "j", function () awful.client.focus.bydirection("left") end, 
         {description = "focus left client", group = "client"}),
-    awful.key({ modkey }, "j", function () awful.client.focus.bydirection("down") end, 
+    awful.key({ modkey }, "k", function () awful.client.focus.bydirection("down") end, 
         {description = "focus down client", group = "client"}),
-    awful.key({ modkey }, "k", function () awful.client.focus.bydirection("up") end, 
+    awful.key({ modkey }, "l", function () awful.client.focus.bydirection("up") end, 
         {description = "focus up client", group = "client"}),
-    awful.key({ modkey }, "l", function () awful.client.focus.bydirection("right") end, 
+    awful.key({ modkey }, ";", function () awful.client.focus.bydirection("right") end, 
         {description = "focus right client", group = "client"}),
 
     -- Switch clients
-    awful.key({ modkey, "Shift" }, "h", function () awful.client.swap.bydirection("left") end,
+    awful.key({ modkey, "Shift" }, "j", function () awful.client.swap.bydirection("left") end,
         {description = "swap with left client", group = "client"}),
-    awful.key({ modkey, "Shift" }, "j", function () awful.client.swap.bydirection("down") end,
+    awful.key({ modkey, "Shift" }, "k", function () awful.client.swap.bydirection("down") end,
         {description = "swap with down client", group = "client"}),
-    awful.key({ modkey, "Shift" }, "k", function () awful.client.swap.bydirection("up") end,
+    awful.key({ modkey, "Shift" }, "l", function () awful.client.swap.bydirection("up") end,
         {description = "swap with up client", group = "client"}),
-    awful.key({ modkey, "Shift" }, "l", function () awful.client.swap.bydirection("right") end,
+    awful.key({ modkey, "Shift" }, ";", function () awful.client.swap.bydirection("right") end,
         {description = "swap with down client", group = "client"}),
 
-    -- Resize clients
-    awful.key({ modkey, "Control" }, "h", function () awful.tag.incmwfact(0.05) end,
+    -- Resize clients (Mod1 = Alt)
+    awful.key({ modkey, "Mod1" }, "j", function () awful.tag.incmwfact(-0.05) end,
         {description = "resize left", group = "layout"}), 
-    awful.key({ modkey, "Control" }, "j", function () awful.client.incmwfact( 0.05) end,
+    awful.key({ modkey, "Mod1" }, "k", function () awful.client.incmwfact( 0.05) end,
         {description = "resize up", group = "layout"}),
-    awful.key({ modkey, "Control" }, "k", function () awful.client.incmwfact(-0.05) end,
+    awful.key({ modkey, "Mod1" }, "l", function () awful.client.incmwfact(-0.05) end,
         {description = "resize down", group = "layout"}),
-    awful.key({ modkey, "Control" }, "l", function () awful.tag.incmwfact(-0.05) end,
+    awful.key({ modkey, "Mod1" }, ";", function () awful.tag.incmwfact(0.05) end,
         {description = "resize right", group = "layout"}),
-   
+
+    -- Switch screens 
+    awful.key({ modkey, "Control" }, "j", function () awful.screen.focus_bydirection("left") end,
+        {description = "resize left", group = "screen"}), 
+    awful.key({ modkey, "Control" }, "k", function () awful.screen.focus_bydirection("down") end,
+        {description = "resize up", group = "screen"}),
+    awful.key({ modkey, "Control" }, "l", function () awful.screen.focus_bydirection("up") end,
+        {description = "resize down", group = "screen"}),
+    awful.key({ modkey, "Control" }, ";", function () awful.screen.focus_bydirection("right") end,
+        {description = "resize right", group = "screen"}),
+
     -- Mystic
     awful.key({ modkey }, "u", awful.client.urgent.jumpto,
         {description = "jump to urgent client", group = "client"}),
@@ -118,9 +128,11 @@ function keys:init(args)
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle,
         {description = "toggle floating", group = "client"}),
     awful.key({ modkey }, "t", function (c) c.ontop = not c.ontop end,
-        {description = "toggle keep on top", group = "client"})
+        {description = "toggle keep on top", group = "client"}),
 
-
+    awful.key({ modkey, "Control" }, "n", function (c) c:move_to_screen() end,
+        {description = "move to next screen", group = "screen"})
+ 
     )
 
 -- Bind all key numbers to tags.
