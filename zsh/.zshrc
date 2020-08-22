@@ -1,7 +1,11 @@
+# ----- environments -----
+export PATH="$PATH:$HOME/.cargo/bin"
+
 # ----- aliases ----- 
 alias ls="ls --color=auto"
 alias ll="ls -la --color=auto"
 alias la="ls -a --color=auto"
+alias vim="nvim"
 
 # ----- options -----
 setopt nocaseglob                                               # Case insensitive globbing
@@ -136,4 +140,5 @@ POWERLEVEL9K_TIME_BACKGROUND="clear"
 POWERLEVEL9K_TIME_FORMAT="%D{%H:%M}"
 POWERLEVEL9K_TIME_ICON=""
 
-source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+#source /usr/share/zsh-theme-powerlevel9k/powerlevel9k.zsh-theme
+source /usr/share/zsh-theme-powerlevel10k/powerlevel10k.zsh-theme
