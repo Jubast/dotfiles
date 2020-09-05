@@ -1,15 +1,14 @@
 call plug#begin()
 
 Plug 'preservim/nerdtree'
-Plug 'altercation/vim-colors-solarized'
+Plug 'morhetz/gruvbox'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'vim-airline/vim-airline'
 
 call plug#end()
 
 syntax enable
-set background=dark
-colorscheme solarized
+autocmd vimenter * colorscheme gruvbox
 
 set relativenumber
 set expandtab
